@@ -1,3 +1,4 @@
+require 'redis'
 RSpec.describe StatusPage do
   before :each do
     @redis = Redis.new

@@ -14,6 +14,7 @@ require 'rspec'
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
 require 'rack/test'
+require 'redis'
 require File.dirname(__FILE__) + '/fixtures/fake_app'
 
 RSpec.configure do |config|

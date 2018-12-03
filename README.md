@@ -22,7 +22,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To use add the following to either your rack app or rails app:
+    Status::Reporter.new do |c|
+        c.api_key = ENV['API_KEY']
+        c.page_id = ENV['PAGE_ID']
+        c.metric_id = ENV['METRIC_ID']
+        c.api_base = ENV['API_BASE']
+        c.redis_url = ENV['REDIS_URL']
+        c.error_metric_id = ENV['ERROR_METRIC_ID']
+        c.request_metric_id = ENV['REQUEST_METRIC_ID']
+    end
+    Rack::App.middleware.use(Status::Reporter)
 
 ## Development
 
