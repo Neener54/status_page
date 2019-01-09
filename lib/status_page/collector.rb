@@ -1,4 +1,14 @@
 require 'redis'
+# Collector is the class that we use to push metrics into the redis instance.
+# This is a simple rack middleware that we want to make sure to insert
+# into the chain where all requests can go from top to bottom.
+# @author Michael Archibald
+# @attr [RackApp] app Rack App
+# @attr [Redis] redis Redis instance to interact with
+#
+# Add this to your app by adding this line to your rails config or your Rack file
+#
+# use StatusPage::Collector, redis_url: "redis://localhost"
 module StatusPage
   class Collector
 

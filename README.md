@@ -1,10 +1,9 @@
 # StatusPage
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/status_page`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
+This Gem includes a basic setup to report stats to StatusPage.io. 
 ## Installation
+Redis is currently a requirement for the project although I have plans to make that optional at some point.
+You'll have to have a working instance of redis available.
 
 Add this line to your application's Gemfile:
 
@@ -23,6 +22,7 @@ Or install it yourself as:
 ## Usage
 
 To use add the following to either your rack app or rails app:
+
     Status::Reporter.new do |c|
         c.api_key = ENV['API_KEY']
         c.page_id = ENV['PAGE_ID']
@@ -32,7 +32,12 @@ To use add the following to either your rack app or rails app:
         c.error_metric_id = ENV['ERROR_METRIC_ID']
         c.request_metric_id = ENV['REQUEST_METRIC_ID']
     end
-    Rack::App.middleware.use(Status::Reporter)
+Then add
+
+    Rack::App.middleware.use Status::Collector, redis_url: ENV['REDIS_URL']
+Or in a rails app
+
+    config.middleware.insert_after Rack::Sendfile, Status::Collector, {redis_url: ENV['REDIS_URL']}
 
 ## Development
 

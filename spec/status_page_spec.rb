@@ -1,4 +1,5 @@
 require 'redis'
+require 'spec_helper'
 RSpec.describe StatusPage do
   before :each do
     @redis = Redis.new
@@ -28,5 +29,9 @@ RSpec.describe StatusPage do
         expect(@redis.get('request_count').to_i).to be(count + 1)
       end
     end
+  end
+
+  describe "StatusPage::Reporter" do
+    # TODO setup webmock and test these changes.
   end
 end
